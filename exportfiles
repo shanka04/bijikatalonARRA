@@ -1,0 +1,105 @@
+import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
+import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
+import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
+import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
+import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
+import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
+import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
+import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
+import com.kms.katalon.core.model.FailureHandling as FailureHandling
+import com.kms.katalon.core.testcase.TestCase as TestCase
+import com.kms.katalon.core.testdata.TestData as TestData
+import com.kms.katalon.core.testng.keyword.TestNGBuiltinKeywords as TestNGKW
+import com.kms.katalon.core.testobject.TestObject as TestObject
+import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
+import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
+import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+
+import groovyjarjarantlr4.v4.codegen.model.ListenerFile
+import internal.GlobalVariable as GlobalVariable
+import org.openqa.selenium.Keys as Keys
+import org.openqa.selenium.chrome.ChromeOptions as ChromeOptions
+import org.openqa.selenium.chrome.ChromeDriver as ChromeDriver
+import org.openqa.selenium.remote.DesiredCapabilities as DesiredCapabilities
+import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
+import java.awt.Desktop as Desktop
+import java.io.File as File
+import java.util.Date
+
+WebUI.openBrowser('')
+
+WebUI.maximizeWindow()
+
+WebUI.navigateToUrl('http://192.168.1.42:8081/login')
+
+WebUI.setText(findTestObject('Object Repository/ARRA/Page_Login  ARRA - Amartha Regulatory Repor_fe642d/input_Username_username'), 
+    'sa')
+
+WebUI.setEncryptedText(findTestObject('Object Repository/ARRA/Page_Login  ARRA - Amartha Regulatory Repor_fe642d/input_Password_password'), 
+    'iFGeFYmXIrUhQZHvW7P22w==')
+
+WebUI.click(findTestObject('ARRA/Page_Login  ARRA - Amartha Regulatory Repor_fe642d/button_Log In'))
+
+WebUI.verifyTextPresent('Dashboard', false)
+
+//nxt
+WebUI.click(findTestObject('jajal1/Page_ARRA - Amartha Regulatory Reporting  A_cc3ec2/span_LLD'))
+
+WebUI.click(findTestObject('next Step/Page_ARRA - Amartha Regulatory Reporting  Analytics/Page_ARRA - Amartha Regulatory Reporting  Analytics/span_Master'), 
+    FailureHandling.STOP_ON_FAILURE)
+
+WebUI.click(findTestObject('businessmapformula/Page_ARRA - Amartha Regulatory Reporting  Analytics/a_Business Map Formula'))
+
+WebUI.verifyElementPresent(findTestObject('add data business map formula/Page_ARRA - Amartha Regulatory Reporting  Analytics/h4_Business Map Formula'), 
+    0)
+
+WebUI.click(findTestObject('export/Page_ARRA - Amartha Regulatory Reporting  Analytics/action'))
+
+WebUI.click(findTestObject('export/Page_ARRA - Amartha Regulatory Reporting  Analytics/Export to excel'))
+
+WebUI.delay(2)
+
+//cara ini embut sih
+//File downloadedFile = new File('C:\\Users\\user\\Downloads\\Bus Map Formula (15).xlsx')
+//WebUI.delay(3)
+//
+//Desktop.getDesktop().open(downloadedFile)
+//WebUI.delay(10)
+
+// Tentukan folder Downloads
+File downloadsFolder = new File("C:\\Users\\user\\Downloads")
+
+// Mendapatkan daftar semua file dengan ekstensi .xlsx dalam folder Downloads
+File[] files = downloadsFolder.listFiles({ dir, name -> name.endsWith(".xlsx") } as FilenameFilter)
+
+// Menemukan file terbaru berdasarkan tanggal modifikasi
+File latestFile = null
+long latestModified = 0
+
+// Iterasi untuk menemukan file dengan tanggal modifikasi terbaru
+files.each { file ->
+	if (file.lastModified() > latestModified) {
+		latestModified = file.lastModified()
+		latestFile = file
+	}
+}
+
+// Jika file terbaru ditemukan, buka file tersebut
+if (latestFile != null) {
+	WebUI.delay(3)
+	Desktop.getDesktop().open(latestFile)
+	WebUI.delay(10)
+} else {
+	println("Tidak ada file Excel ditemukan di folder Downloads.")
+}
+
+//WebUI.delay(5)
+
+// Menutup semua instance aplikasi Excel yang terbuka (untuk Windows)
+try {
+	Runtime.getRuntime().exec("taskkill /f /im excel.exe")
+	println("Excel telah ditutup.")
+} catch (IOException e) {
+	println("Gagal menutup Excel: " + e.getMessage())
+}
+
