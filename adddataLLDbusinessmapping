@@ -1,0 +1,84 @@
+import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
+import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
+import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
+import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
+import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
+import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
+import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
+import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
+import com.kms.katalon.core.model.FailureHandling as FailureHandling
+import com.kms.katalon.core.testcase.TestCase as TestCase
+import com.kms.katalon.core.testdata.TestData as TestData
+import com.kms.katalon.core.testng.keyword.TestNGBuiltinKeywords as TestNGKW
+import com.kms.katalon.core.testobject.TestObject as TestObject
+import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
+import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
+import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+import internal.GlobalVariable as GlobalVariable
+import org.openqa.selenium.Keys as Keys
+
+WebUI.callTestCase(findTestCase('ARRA/Login'), [:], FailureHandling.STOP_ON_FAILURE)
+
+//WebUI.waitForElementVisible(null, 10)
+WebUI.click(findTestObject('next Step/Page_ARRA - Amartha Regulatory Reporting  Analytics/div_LLD'))
+
+WebUI.click(findTestObject('next Step/Page_ARRA - Amartha Regulatory Reporting  Analytics/Page_ARRA - Amartha Regulatory Reporting  Analytics/span_Master'), 
+    FailureHandling.STOP_ON_FAILURE)
+
+WebUI.click(findTestObject('next Step/Page_ARRA - Amartha Regulatory Reporting  Analytics/a_Business Mapping'))
+
+WebUI.verifyElementPresent(findTestObject('next Step/Page_ARRA - Amartha Regulatory Reporting  Analytics/h4_Business Mapping'), 
+    0)
+
+WebUI.click(findTestObject('next Step/Page_ARRA - Amartha Regulatory Reporting  Analytics/button_ADD'))
+
+//WebUI.click(findTestObject('next Step/Page_ARRA - Amartha Regulatory Reporting  Analytics/div_Business Mapping'))
+WebUI.setText(findTestObject('next Step/Page_ARRA - Amartha Regulatory Reporting  Analytics/input__FORM_CD'), '0987')
+
+WebUI.setText(findTestObject('next Step/Page_ARRA - Amartha Regulatory Reporting  Analytics/input__MAPPING_DESCRIPTION'), 
+    'TestMumunAutx')
+
+WebUI.setText(findTestObject('next Step/Page_ARRA - Amartha Regulatory Reporting  Analytics/input__COLUMN_VALUE'), '123')
+
+WebUI.setText(findTestObject('next Step/Page_ARRA - Amartha Regulatory Reporting  Analytics/input__SOURCE_TABLE'), '12')
+
+WebUI.click(findTestObject('next Step/Page_ARRA - Amartha Regulatory Reporting  Analytics/span__k-button-icon k-icon k-i-arrow-s'))
+
+WebUI.click(findTestObject('Page_ARRA - Amartha Regulatory Reporting  Analytics/span_Y -'))
+
+WebUI.setText(findTestObject('next Step/Page_ARRA - Amartha Regulatory Reporting  Analytics/input__MAPPING_CD'), 'LLD123')
+
+WebUI.setText(findTestObject('next Step/Page_ARRA - Amartha Regulatory Reporting  Analytics/input__COLUMN_NAME'), '12')
+
+WebUI.setText(findTestObject('next Step/Page_ARRA - Amartha Regulatory Reporting  Analytics/input__IS_DEFAULT'), '1')
+
+WebUI.setText(findTestObject('next Step/Page_ARRA - Amartha Regulatory Reporting  Analytics/input__is_key'), '1')
+
+WebUI.setText(findTestObject('next Step/Page_ARRA - Amartha Regulatory Reporting  Analytics/input__SEQUENCE'), '113')
+
+WebUI.click(findTestObject('next Step/Page_ARRA - Amartha Regulatory Reporting  Analytics/button_Save'))
+
+WebUI.check(findTestObject('next Step/Page_ARRA - Amartha Regulatory Reporting  Analytics/div_Data Saved Successfully'))
+
+WebUI.click(findTestObject('next Step/Page_ARRA - Amartha Regulatory Reporting  Analytics/button_REFRESH'))
+
+WebUI.setText(findTestObject('mbut/Page_ARRA - Amartha Regulatory Reporting  Analytics/input_Business Mapping_search_value_val_0'), 
+    'TestMu')
+
+WebUI.click(findTestObject('mbut/Page_ARRA - Amartha Regulatory Reporting  Analytics/span_Business Mapping_k-icon k-i-plus'))
+
+WebUI.setText(findTestObject('mbut/Page_ARRA - Amartha Regulatory Reporting  Analytics/input_Business Mapping_field_val_1'), 
+    'Reference')
+
+WebUI.setText(findTestObject('mbut/Page_ARRA - Amartha Regulatory Reporting  Analytics/input_Business Mapping_filter_type_val_1'), 
+    'Equals')
+
+WebUI.clearText(findTestObject('mbut/Page_ARRA - Amartha Regulatory Reporting  Analytics/input_Business Mapping_search_value_val_1'))
+
+WebUI.setText(findTestObject('mbut/Page_ARRA - Amartha Regulatory Reporting  Analytics/input_Business Mapping_search_value_val_1'), 
+    '633')
+
+WebUI.click(findTestObject('next Step/Page_ARRA - Amartha Regulatory Reporting  Analytics/button_REFRESH'))
+
+WebUI.delay(10)
+
